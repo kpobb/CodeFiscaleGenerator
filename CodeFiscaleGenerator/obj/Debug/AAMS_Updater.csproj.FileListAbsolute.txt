@@ -1,0 +1,16 @@
+c:\users\okushnir\documents\visual studio 2012\Projects\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.csprojResolveAssemblyReference.cache
+c:\users\okushnir\documents\visual studio 2012\Projects\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.Form1.resources
+c:\users\okushnir\documents\visual studio 2012\Projects\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.Properties.Resources.resources
+c:\users\okushnir\documents\visual studio 2012\Projects\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.csproj.GenerateResource.Cache
+c:\users\okushnir\documents\visual studio 2012\Projects\AAMS_Updater\AAMS_Updater\bin\Debug\AAMS_Updater.exe
+c:\users\okushnir\documents\visual studio 2012\Projects\AAMS_Updater\AAMS_Updater\bin\Debug\AAMS_Updater.pdb
+c:\users\okushnir\documents\visual studio 2012\Projects\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.exe
+c:\users\okushnir\documents\visual studio 2012\Projects\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.pdb
+D:\Projects\Work\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.exe
+D:\Projects\Work\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.pdb
+D:\Projects\Work\AAMS_Updater\AAMS_Updater\bin\Debug\AAMS_Updater.exe
+D:\Projects\Work\AAMS_Updater\AAMS_Updater\bin\Debug\AAMS_Updater.pdb
+D:\Projects\Work\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.csprojResolveAssemblyReference.cache
+D:\Projects\Work\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.Form1.resources
+D:\Projects\Work\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.Properties.Resources.resources
+D:\Projects\Work\AAMS_Updater\AAMS_Updater\obj\Debug\AAMS_Updater.csproj.GenerateResource.Cache
