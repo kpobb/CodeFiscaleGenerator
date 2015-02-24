@@ -7,6 +7,7 @@ namespace CodeFiscaleGenerator.Infrastucture
     internal class HttpRequestHandler
     {
         private const int RequestTimeoutMs = 5000;
+        private const string ContentType = "application/xml";
 
         public enum HttpMethod
         {
@@ -17,7 +18,7 @@ namespace CodeFiscaleGenerator.Infrastucture
         public void ExecutePost(string url, string data)
         {
             var request = WebRequest.Create(url);
-            request.ContentType = "application/xml";
+            request.ContentType = ContentType;
             request.Method = "POST";
             request.Timeout = RequestTimeoutMs;
 
@@ -33,7 +34,7 @@ namespace CodeFiscaleGenerator.Infrastucture
         public string ExecuteHttpRequest(string url, HttpMethod method = HttpMethod.GET)
         {
             var request = WebRequest.Create(url);
-            request.ContentType = "application/xml";
+            request.ContentType = ContentType;
             request.Method = method.ToString();
             request.Timeout = RequestTimeoutMs;
 

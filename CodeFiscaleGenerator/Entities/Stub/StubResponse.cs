@@ -6,6 +6,6 @@ namespace CodeFiscaleGenerator.Entities.Stub
     public class StubResponse
     {
         [XmlElement(ElementName = "ConfigurableResponse")]
-        public CodeFiscaleData[] CodeFiscaleArray { get; set; }
+        public CodeFiscaleData[] Items { get; set; }
     }
 }

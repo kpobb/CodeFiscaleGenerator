@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CodeFiscaleGenerator.Entities.Stub;
 using CodeFiscaleGenerator.Infrastucture;
 using CodeFiscaleGenerator.Properties;
+using CodeFiscaleGenerator.Services;
 
 namespace CodeFiscaleGenerator
 {
@@ -27,6 +28,12 @@ namespace CodeFiscaleGenerator
             _stubService = new PlatformStubService(new HttpRequestHandler());
         }
 
+        public override sealed string Text
+        {
+            get { return base.Text; }
+            set { base.Text = value; }
+        }
+
         private void Create_Click(object sender, EventArgs e)
         {
             string codeFiscale;
@@ -37,7 +44,6 @@ namespace CodeFiscaleGenerator
             {
                 codeFiscale = RegisterNewCodeFiscale();
 
-                // getting list including generated code fiscale
                 response = GetCodeFiscaleList();
             }
             catch (Exception ex)
@@ -72,7 +78,7 @@ namespace CodeFiscaleGenerator
             {
                 var response = GetCodeFiscaleList();
 
-                if (response == null || !response.CodeFiscaleArray.Any())
+                if (response == null || !response.Items.Any())
                 {
                     MessageBox.Show("Remote server doesn't contain any records.", Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -129,7 +135,7 @@ namespace CodeFiscaleGenerator
             {
                 var codeFiscaleList = GetCodeFiscaleList();
 
-                if (codeFiscaleList == null || !codeFiscaleList.CodeFiscaleArray.Any())
+                if (codeFiscaleList == null || !codeFiscaleList.Items.Any())
                 {
                     MessageBox.Show("Remote server doesn't contain any records.", Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -163,13 +169,13 @@ namespace CodeFiscaleGenerator
 
             string codeFiscale;
 
-            var fiscaleCodes = GetCodeFiscaleList();
+            var codeFiscaleList = GetCodeFiscaleList();
 
             do
             {
                 codeFiscale = _calculator.GenerateFiscaleCode(_viewState.SelectedLabelId, _viewState.SelectedRegistrationId, _viewState.SelectedSubregistrationId);
 
-                if (_calculator.Find(fiscaleCodes, codeFiscale))
+                if (_calculator.Find(codeFiscaleList, codeFiscale))
                 {
                     _stubService.RegisterNewCodeFiscale(codeFiscale, _viewState.SelectedRegistrationId, _viewState.SelectedSubregistrationId, _viewState.SelectedLabelId);
 

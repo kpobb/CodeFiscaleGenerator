@@ -121,7 +121,7 @@
             // 
             // checkBtn
             // 
-            this.checkBtn.Location = new System.Drawing.Point(113, 204);
+            this.checkBtn.Location = new System.Drawing.Point(17, 235);
             this.checkBtn.Name = "checkBtn";
             this.checkBtn.Size = new System.Drawing.Size(90, 25);
             this.checkBtn.TabIndex = 8;
@@ -133,7 +133,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(128, 27);
+            this.label5.Location = new System.Drawing.Point(131, 30);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(122, 19);
             this.label5.TabIndex = 11;
@@ -144,7 +144,7 @@
             this.cloneCBox.AutoSize = true;
             this.cloneCBox.Checked = true;
             this.cloneCBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cloneCBox.Location = new System.Drawing.Point(150, 79);
+            this.cloneCBox.Location = new System.Drawing.Point(150, 78);
             this.cloneCBox.Name = "cloneCBox";
             this.cloneCBox.Size = new System.Drawing.Size(52, 17);
             this.cloneCBox.TabIndex = 12;
@@ -163,7 +163,7 @@
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(17, 235);
+            this.deleteBtn.Location = new System.Drawing.Point(112, 235);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(90, 25);
             this.deleteBtn.TabIndex = 15;
@@ -175,18 +175,18 @@
             // 
             this.copyBtn.Location = new System.Drawing.Point(209, 171);
             this.copyBtn.Name = "copyBtn";
-            this.copyBtn.Size = new System.Drawing.Size(54, 28);
+            this.copyBtn.Size = new System.Drawing.Size(49, 26);
             this.copyBtn.TabIndex = 16;
             this.copyBtn.Text = "Copy";
             this.copyBtn.UseVisualStyleBackColor = true;
             this.copyBtn.Click += new System.EventHandler(this.CopyBtn_Click);
             // 
-            // Form1
+            // CodeFiscaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
-            this.ClientSize = new System.Drawing.Size(270, 272);
+            this.ClientSize = new System.Drawing.Size(265, 272);
             this.Controls.Add(this.copyBtn);
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.label6);
@@ -204,7 +204,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "CodeFiscaleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CodeFiscaleGenerator vX.X";
             this.ResumeLayout(false);

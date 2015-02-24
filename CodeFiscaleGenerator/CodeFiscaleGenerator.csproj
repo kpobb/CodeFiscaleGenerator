@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="ComboBoxItem.cs" />
     <Compile Include="Entities\Stub\CodeFiscaleData.cs" />
+    <Compile Include="Configurations\CodeFiscaleConfiguration.cs" />
     <Compile Include="Entities\Stub\StubResponse.cs" />
     <Compile Include="CodeFiscaleForm.cs">
       <SubType>Form</SubType>
@@ -74,7 +75,7 @@
     </Compile>
     <Compile Include="Infrastucture\CodeFiscaleCalculator.cs" />
     <Compile Include="Infrastucture\HttpRequestHandler.cs" />
-    <Compile Include="Infrastucture\PlatformStubService.cs" />
+    <Compile Include="Services\PlatformStubService.cs" />
     <Compile Include="Infrastucture\ViewState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

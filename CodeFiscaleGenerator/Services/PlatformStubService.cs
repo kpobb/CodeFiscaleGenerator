@@ -2,10 +2,11 @@
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using CodeFiscaleGenerator.Entities;
+using CodeFiscaleGenerator.Configurations;
 using CodeFiscaleGenerator.Entities.Stub;
+using CodeFiscaleGenerator.Infrastucture;
 
-namespace CodeFiscaleGenerator.Infrastucture
+namespace CodeFiscaleGenerator.Services
 {
     internal class PlatformStubService
     {
@@ -20,7 +21,7 @@ namespace CodeFiscaleGenerator.Infrastucture
         {
             var serializer = new XmlSerializer(typeof(StubResponse));
 
-            var url = string.Format("https://213.92.84.21:8843/pgad-accounting-protocol-stub/service/rest/configure/getConfiguredResponses/{0}", labelId);
+            var url = string.Format(CodeFiscaleConfiguration.GetUrl, labelId);
 
             var response = _requestHandler.ExecuteHttpRequest(url);
 
@@ -36,7 +37,7 @@ namespace CodeFiscaleGenerator.Infrastucture
         {
             var configurableResponses = new StubResponse
             {
-                CodeFiscaleArray = new[]
+                Items = new[]
                 {
                     new CodeFiscaleData
                     {
@@ -60,15 +61,14 @@ namespace CodeFiscaleGenerator.Infrastucture
                 serializer.Serialize(stringWriter, configurableResponses, ns);
             }
 
-            var url = string.Format("https://213.92.84.21:8843/pgad-accounting-protocol-stub/service/rest/configure/addResponses/{0}", labelId);
+            var url = string.Format(CodeFiscaleConfiguration.PostUrl, labelId);
 
             _requestHandler.ExecutePost(url, builder.ToString());
         }
 
         public void DeleteCodeFiscale(int labelId, string codeFiscale)
         {
-            var url = string.Format("https://213.92.84.21:8843/pgad-accounting-protocol-stub/service/rest/configure/resetResponseByFiscalCode/{0}/{1}",
-                            labelId, codeFiscale);
+            var url = string.Format(CodeFiscaleConfiguration.DeletetUrl, labelId, codeFiscale);
 
            _requestHandler.ExecuteHttpRequest(url, HttpRequestHandler.HttpMethod.DELETE);
         }

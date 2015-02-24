@@ -54,8 +54,8 @@ namespace CodeFiscaleGenerator.Infrastucture
 
         public bool Find(StubResponse fiscaleCodes, string fiscaleCode)
         {
-            return !(fiscaleCodes != null && fiscaleCodes.CodeFiscaleArray != null && 
-                fiscaleCodes.CodeFiscaleArray.Any(s => s.FiscalCode.Equals(fiscaleCode, StringComparison.InvariantCultureIgnoreCase)));
+            return !(fiscaleCodes != null && fiscaleCodes.Items != null && 
+                fiscaleCodes.Items.Any(s => s.FiscalCode.Equals(fiscaleCode, StringComparison.InvariantCultureIgnoreCase)));
         }
 
         public bool IsCodeFiscaleValid(string codeFiscale)
