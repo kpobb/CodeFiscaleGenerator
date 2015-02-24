@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using CodeFiscaleGenerator.Entities;
 using CodeFiscaleGenerator.Entities.Stub;
 
 namespace CodeFiscaleGenerator.Infrastucture
@@ -10,7 +9,6 @@ namespace CodeFiscaleGenerator.Infrastucture
     {
         public string GenerateFiscaleCode(int labelId, int registrationId, int subRegistrationId)
         {
-
             var random = new Random();
 
             var code = new StringBuilder();
@@ -47,12 +45,14 @@ namespace CodeFiscaleGenerator.Infrastucture
                 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
                 'V', 'W', 'X', 'Y', 'Z'
             };
-            code.Append(letters[random.Next(1, 26)]);
+            var letterIndex = random.Next(0, letters.Length - 1);
+
+            code.Append(letters[letterIndex]);
 
             return code.ToString();
         }
 
-        public bool IsCodeFiscaleUnique(StubResponse fiscaleCodes, string fiscaleCode)
+        public bool Find(StubResponse fiscaleCodes, string fiscaleCode)
         {
             return !(fiscaleCodes != null && fiscaleCodes.CodeFiscaleArray != null && 
                 fiscaleCodes.CodeFiscaleArray.Any(s => s.FiscalCode.Equals(fiscaleCode, StringComparison.InvariantCultureIgnoreCase)));
