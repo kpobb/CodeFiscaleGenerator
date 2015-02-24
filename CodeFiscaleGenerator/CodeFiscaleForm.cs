@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 using CodeFiscaleGenerator.Entities.Stub;
 using CodeFiscaleGenerator.Infrastucture;
@@ -28,6 +27,12 @@ namespace CodeFiscaleGenerator
             _stubService = new PlatformStubService(new HttpRequestHandler());
         }
 
+        private enum Action
+        {
+            Check,
+            Delete
+        }
+
         public override sealed string Text
         {
             get { return base.Text; }
@@ -53,7 +58,7 @@ namespace CodeFiscaleGenerator
                 return;
             }
 
-            if (!_calculator.Find(response, codeFiscale))
+            if (!response.HasCode(codeFiscale))
             {
                 fiscaleCodeTbox.Text = codeFiscale;
 
@@ -67,36 +72,7 @@ namespace CodeFiscaleGenerator
 
         private void Check_Click(object sender, EventArgs e)
         {
-            if (!_calculator.IsCodeFiscaleValid(_viewState.CodeFiscale))
-            {
-                MessageBox.Show("Please enter code fiscale.", Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return;
-            }
-
-            try
-            {
-                var response = GetCodeFiscaleList();
-
-                if (response == null || !response.Items.Any())
-                {
-                    MessageBox.Show("Remote server doesn't contain any records.", Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                if (!_calculator.Find(response, _viewState.CodeFiscale))
-                {
-                    MessageBox.Show("Code fiscale was FOUND on remote server!", Resources.InformationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Code fiscale was NOT found.", Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            ExecuteAction(Action.Check, "Code fiscale was FOUND on remote server!", "Code fiscale was NOT found.");
         }
 
         private void CloneCbox_CheckedChanged(object sender, EventArgs e)
@@ -124,7 +100,17 @@ namespace CodeFiscaleGenerator
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            if (!_calculator.IsCodeFiscaleValid(_viewState.CodeFiscale))
+            ExecuteAction(Action.Delete, "Code fiscale was succesfully deleted.", "Code fiscale was NOT found.");
+        }
+
+        private void CopyBtn_Click(object sender, EventArgs e)
+        {
+            _viewState.PutCodeFiscaleToBuffer();
+        }
+
+        private void ExecuteAction(Action action, string successMessage, string failedMessage)
+        {
+            if (string.IsNullOrWhiteSpace(_viewState.CodeFiscale))
             {
                 MessageBox.Show("Please enter code fiscale.", Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -135,32 +121,26 @@ namespace CodeFiscaleGenerator
             {
                 var codeFiscaleList = GetCodeFiscaleList();
 
-                if (codeFiscaleList == null || !codeFiscaleList.Items.Any())
+                if (!codeFiscaleList.HasCode(_viewState.CodeFiscale))
                 {
-                    MessageBox.Show("Remote server doesn't contain any records.", Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                    switch (action)
+                    {
+                        case Action.Delete:
+                            _stubService.DeleteCodeFiscale(_viewState.SelectedLabelId, _viewState.CodeFiscale);
+                            break;
+                    }
 
-                if (!_calculator.Find(codeFiscaleList, _viewState.CodeFiscale))
-                {
-                    _stubService.DeleteCodeFiscale(_viewState.SelectedLabelId, _viewState.CodeFiscale);
-
-                    MessageBox.Show("Code fiscale was succesfully deleted.", Resources.InformationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(successMessage, Resources.InformationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Code fiscale was NOT found.", Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }              
+                    MessageBox.Show(failedMessage, Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void CopyBtn_Click(object sender, EventArgs e)
-        {
-            _viewState.PutCodeFiscaleToBuffer();
         }
 
         private string RegisterNewCodeFiscale()
@@ -175,7 +155,7 @@ namespace CodeFiscaleGenerator
             {
                 codeFiscale = _calculator.GenerateFiscaleCode(_viewState.SelectedLabelId, _viewState.SelectedRegistrationId, _viewState.SelectedSubregistrationId);
 
-                if (_calculator.Find(codeFiscaleList, codeFiscale))
+                if (codeFiscaleList.HasCode(codeFiscale))
                 {
                     _stubService.RegisterNewCodeFiscale(codeFiscale, _viewState.SelectedRegistrationId, _viewState.SelectedSubregistrationId, _viewState.SelectedLabelId);
 
@@ -188,7 +168,7 @@ namespace CodeFiscaleGenerator
 
             if (requestAttempts == 0 && string.IsNullOrWhiteSpace(codeFiscale))
             {
-                throw new Exception(string.Format("Impossible to generate a unique code fiscale after {0} attempts. ", MaxRequestAttempts));
+                throw new Exception(string.Format("Can't generate a unique code fiscale after {0} attempts.", MaxRequestAttempts));
             }
 
             return codeFiscale;

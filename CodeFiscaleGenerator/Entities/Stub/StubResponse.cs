@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Linq;
+using System.Xml.Serialization;
 
 namespace CodeFiscaleGenerator.Entities.Stub
 {
@@ -7,5 +9,10 @@ namespace CodeFiscaleGenerator.Entities.Stub
     {
         [XmlElement(ElementName = "ConfigurableResponse")]
         public CodeFiscaleData[] Items { get; set; }
+
+        public bool HasCode(string codeFiscale)
+        {
+            return !(Items != null && Items.Any(s => s.FiscalCode.Equals(codeFiscale, StringComparison.InvariantCultureIgnoreCase)));
+        }
     }
 }

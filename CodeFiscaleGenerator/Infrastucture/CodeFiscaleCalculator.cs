@@ -51,16 +51,5 @@ namespace CodeFiscaleGenerator.Infrastucture
 
             return code.ToString();
         }
-
-        public bool Find(StubResponse fiscaleCodes, string fiscaleCode)
-        {
-            return !(fiscaleCodes != null && fiscaleCodes.Items != null && 
-                fiscaleCodes.Items.Any(s => s.FiscalCode.Equals(fiscaleCode, StringComparison.InvariantCultureIgnoreCase)));
-        }
-
-        public bool IsCodeFiscaleValid(string codeFiscale)
-        {
-            return codeFiscale.Length != 0;
-        }
     }
 }
