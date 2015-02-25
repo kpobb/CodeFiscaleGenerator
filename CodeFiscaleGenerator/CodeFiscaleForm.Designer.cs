@@ -49,7 +49,7 @@
             // 
             this.labelCbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.labelCbox.FormattingEnabled = true;
-            this.labelCbox.Location = new System.Drawing.Point(17, 28);
+            this.labelCbox.Location = new System.Drawing.Point(22, 26);
             this.labelCbox.Name = "labelCbox";
             this.labelCbox.Size = new System.Drawing.Size(105, 21);
             this.labelCbox.TabIndex = 0;
@@ -57,7 +57,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 12);
+            this.label1.Location = new System.Drawing.Point(19, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 13);
             this.label1.TabIndex = 1;
@@ -66,7 +66,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 59);
+            this.label2.Location = new System.Drawing.Point(19, 57);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 13);
             this.label2.TabIndex = 3;
@@ -76,7 +76,7 @@
             // 
             this.registrationCbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.registrationCbox.FormattingEnabled = true;
-            this.registrationCbox.Location = new System.Drawing.Point(17, 75);
+            this.registrationCbox.Location = new System.Drawing.Point(22, 73);
             this.registrationCbox.Name = "registrationCbox";
             this.registrationCbox.Size = new System.Drawing.Size(124, 21);
             this.registrationCbox.TabIndex = 2;
@@ -85,7 +85,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 107);
+            this.label3.Location = new System.Drawing.Point(19, 105);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(111, 13);
             this.label3.TabIndex = 5;
@@ -95,7 +95,7 @@
             // 
             this.subregistrationCbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.subregistrationCbox.FormattingEnabled = true;
-            this.subregistrationCbox.Location = new System.Drawing.Point(17, 123);
+            this.subregistrationCbox.Location = new System.Drawing.Point(22, 121);
             this.subregistrationCbox.Name = "subregistrationCbox";
             this.subregistrationCbox.Size = new System.Drawing.Size(124, 21);
             this.subregistrationCbox.TabIndex = 4;
@@ -104,14 +104,14 @@
             // 
             this.fiscaleCodeTbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.fiscaleCodeTbox.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.fiscaleCodeTbox.Location = new System.Drawing.Point(17, 171);
+            this.fiscaleCodeTbox.Location = new System.Drawing.Point(22, 169);
             this.fiscaleCodeTbox.Name = "fiscaleCodeTbox";
             this.fiscaleCodeTbox.Size = new System.Drawing.Size(186, 26);
             this.fiscaleCodeTbox.TabIndex = 6;
             // 
             // createBtn
             // 
-            this.createBtn.Location = new System.Drawing.Point(17, 204);
+            this.createBtn.Location = new System.Drawing.Point(22, 202);
             this.createBtn.Name = "createBtn";
             this.createBtn.Size = new System.Drawing.Size(90, 25);
             this.createBtn.TabIndex = 7;
@@ -121,7 +121,7 @@
             // 
             // checkBtn
             // 
-            this.checkBtn.Location = new System.Drawing.Point(17, 235);
+            this.checkBtn.Location = new System.Drawing.Point(22, 233);
             this.checkBtn.Name = "checkBtn";
             this.checkBtn.Size = new System.Drawing.Size(90, 25);
             this.checkBtn.TabIndex = 8;
@@ -133,7 +133,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(131, 30);
+            this.label5.Location = new System.Drawing.Point(136, 28);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(122, 19);
             this.label5.TabIndex = 11;
@@ -144,7 +144,7 @@
             this.cloneCBox.AutoSize = true;
             this.cloneCBox.Checked = true;
             this.cloneCBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cloneCBox.Location = new System.Drawing.Point(150, 78);
+            this.cloneCBox.Location = new System.Drawing.Point(155, 76);
             this.cloneCBox.Name = "cloneCBox";
             this.cloneCBox.Size = new System.Drawing.Size(52, 17);
             this.cloneCBox.TabIndex = 12;
@@ -155,7 +155,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 155);
+            this.label6.Location = new System.Drawing.Point(19, 153);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 13);
             this.label6.TabIndex = 13;
@@ -163,7 +163,7 @@
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(112, 235);
+            this.deleteBtn.Location = new System.Drawing.Point(117, 233);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(90, 25);
             this.deleteBtn.TabIndex = 15;
@@ -173,7 +173,7 @@
             // 
             // copyBtn
             // 
-            this.copyBtn.Location = new System.Drawing.Point(209, 171);
+            this.copyBtn.Location = new System.Drawing.Point(214, 169);
             this.copyBtn.Name = "copyBtn";
             this.copyBtn.Size = new System.Drawing.Size(49, 26);
             this.copyBtn.TabIndex = 16;
@@ -186,7 +186,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
-            this.ClientSize = new System.Drawing.Size(265, 272);
+            this.ClientSize = new System.Drawing.Size(282, 272);
             this.Controls.Add(this.copyBtn);
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.label6);

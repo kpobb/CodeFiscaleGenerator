@@ -71,11 +71,6 @@ namespace CodeFiscaleGenerator.Infrastucture
             };
         }
 
-        public void PutCodeFiscaleToBuffer()
-        {
-            Clipboard.SetText(CodeFiscale);
-        }
-
         private void FillComboBox(ComboBox cbox, object[] values)
         {
             cbox.Items.AddRange(values);

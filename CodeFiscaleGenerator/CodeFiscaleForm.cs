@@ -21,7 +21,7 @@ namespace CodeFiscaleGenerator
 
             _viewState = new ViewState(labelCbox, registrationCbox, subregistrationCbox, fiscaleCodeTbox);
             _viewState.SetupTrustRelationshipForSSL();
-            Text = string.Format("CodeFiscaleGenerator v{0}.{1}", _viewState.AssemblyVersion.Major, _viewState.AssemblyVersion.Minor);
+            Text = string.Format("CodeFiscaleGenerator v{0}.{1}.{2}", _viewState.AssemblyVersion.Major, _viewState.AssemblyVersion.Minor, _viewState.AssemblyVersion.Build);
 
             _calculator = new CodeFiscaleCalculator();
 
@@ -106,7 +106,10 @@ namespace CodeFiscaleGenerator
 
         private void CopyBtn_Click(object sender, EventArgs e)
         {
-            _viewState.PutCodeFiscaleToBuffer();
+            if (!string.IsNullOrWhiteSpace(_viewState.CodeFiscale))
+            {
+                Clipboard.SetText(_viewState.CodeFiscale);
+            }
         }
 
         private void ExecuteAction(Action action, string successMessage, string failedMessage)
