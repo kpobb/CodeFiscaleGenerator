@@ -8,20 +8,22 @@ using CodeFiscaleGenerator.Infrastucture;
 
 namespace CodeFiscaleGenerator.Services
 {
-    internal class PlatformStubService
+    internal sealed class PlatformStubService
     {
         private readonly HttpRequestHandler _requestHandler;
+        private readonly StubConfiguration _configuration;
 
-        public PlatformStubService(HttpRequestHandler requestHandler)
+        public PlatformStubService(HttpRequestHandler requestHandler, StubConfiguration configuration)
         {
             _requestHandler = requestHandler;
+            _configuration = configuration;
         }
 
         public StubResponse GetCodeFiscaleList(int labelId)
         {
             var serializer = new XmlSerializer(typeof(StubResponse));
 
-            var url = string.Format(CodeFiscaleConfiguration.GetUrl, labelId);
+            var url = string.Format(_configuration.ViewCodeFiscaleUrl, labelId);
 
             var response = _requestHandler.ExecuteHttpRequest(url);
 
@@ -61,14 +63,14 @@ namespace CodeFiscaleGenerator.Services
                 serializer.Serialize(stringWriter, configurableResponses, ns);
             }
 
-            var url = string.Format(CodeFiscaleConfiguration.PostUrl, labelId);
+            var url = string.Format(_configuration.CreateCodeFiscaleUrl, labelId);
 
             _requestHandler.ExecutePost(url, builder.ToString());
         }
 
         public void DeleteCodeFiscale(int labelId, string codeFiscale)
         {
-            var url = string.Format(CodeFiscaleConfiguration.DeletetUrl, labelId, codeFiscale);
+            var url = string.Format(_configuration.DeletetCodeFiscaleUrl, labelId, codeFiscale);
 
            _requestHandler.ExecuteHttpRequest(url, HttpRequestHandler.HttpMethod.DELETE);
         }

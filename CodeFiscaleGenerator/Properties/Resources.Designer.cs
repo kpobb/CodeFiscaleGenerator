@@ -61,6 +61,51 @@ namespace CodeFiscaleGenerator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Code fiscale was successfully created!.
+        /// </summary>
+        internal static string CodeFiscaleSuccessMessage {
+            get {
+                return ResourceManager.GetString("CodeFiscaleSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code fiscale was succesfully deleted..
+        /// </summary>
+        internal static string CodeFiscaleWasDeletedMessage {
+            get {
+                return ResourceManager.GetString("CodeFiscaleWasDeletedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code fiscale was FOUND on remote server!.
+        /// </summary>
+        internal static string CodeFiscaleWasFoundMessage {
+            get {
+                return ResourceManager.GetString("CodeFiscaleWasFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code fiscale was NOT found..
+        /// </summary>
+        internal static string CodeFiscaleWasNotDeleted {
+            get {
+                return ResourceManager.GetString("CodeFiscaleWasNotDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code fiscale was NOT found..
+        /// </summary>
+        internal static string CodeFiscaleWasNotFoundMessage {
+            get {
+                return ResourceManager.GetString("CodeFiscaleWasNotFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string ErrorTitle {
@@ -75,6 +120,24 @@ namespace CodeFiscaleGenerator.Properties {
         internal static string InformationTitle {
             get {
                 return ResourceManager.GetString("InformationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal error. Probably Platform issue. Please try again later..
+        /// </summary>
+        internal static string InternalErrorMessage {
+            get {
+                return ResourceManager.GetString("InternalErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter code fiscale..
+        /// </summary>
+        internal static string PleaseEnterCodeFiscaleMessage {
+            get {
+                return ResourceManager.GetString("PleaseEnterCodeFiscaleMessage", resourceCulture);
             }
         }
     }

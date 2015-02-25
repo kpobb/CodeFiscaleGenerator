@@ -63,9 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComboBoxItem.cs" />
+    <Compile Include="Infrastucture\ComboBoxItem.cs" />
     <Compile Include="Entities\Stub\CodeFiscaleData.cs" />
-    <Compile Include="Configurations\CodeFiscaleConfiguration.cs" />
+    <Compile Include="Configurations\StubConfiguration.cs" />
     <Compile Include="Entities\Stub\StubResponse.cs" />
     <Compile Include="CodeFiscaleForm.cs">
       <SubType>Form</SubType>

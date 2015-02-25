@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace CodeFiscaleGenerator.Infrastucture
 {
-    internal class ViewState
+    internal sealed class ViewState
     {
         private readonly ComboBox _label;
         private readonly ComboBox _registrationStatus;

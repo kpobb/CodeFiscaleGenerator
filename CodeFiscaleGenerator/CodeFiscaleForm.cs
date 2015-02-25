@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using CodeFiscaleGenerator.Configurations;
 using CodeFiscaleGenerator.Entities.Stub;
 using CodeFiscaleGenerator.Infrastucture;
 using CodeFiscaleGenerator.Properties;
@@ -20,11 +21,11 @@ namespace CodeFiscaleGenerator
 
             _viewState = new ViewState(labelCbox, registrationCbox, subregistrationCbox, fiscaleCodeTbox);
             _viewState.SetupTrustRelationshipForSSL();
-
             Text = string.Format("CodeFiscaleGenerator v{0}.{1}", _viewState.AssemblyVersion.Major, _viewState.AssemblyVersion.Minor);
 
             _calculator = new CodeFiscaleCalculator();
-            _stubService = new PlatformStubService(new HttpRequestHandler());
+
+            _stubService = new PlatformStubService(new HttpRequestHandler(), new StubConfiguration());
         }
 
         private enum Action
@@ -58,21 +59,21 @@ namespace CodeFiscaleGenerator
                 return;
             }
 
-            if (!response.HasCode(codeFiscale))
+            if (response != null && !response.HasCode(codeFiscale))
             {
                 fiscaleCodeTbox.Text = codeFiscale;
 
-                MessageBox.Show("Fiscale code was successfully created!", Resources.InformationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Resources.CodeFiscaleSuccessMessage, Resources.InformationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Internal error. Probably Platform issue. Please try again later.", Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Resources.InternalErrorMessage, Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void Check_Click(object sender, EventArgs e)
         {
-            ExecuteAction(Action.Check, "Code fiscale was FOUND on remote server!", "Code fiscale was NOT found.");
+            ExecuteAction(Action.Check, Resources.CodeFiscaleWasFoundMessage, Resources.CodeFiscaleWasNotFoundMessage);
         }
 
         private void CloneCbox_CheckedChanged(object sender, EventArgs e)
@@ -100,7 +101,7 @@ namespace CodeFiscaleGenerator
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            ExecuteAction(Action.Delete, "Code fiscale was succesfully deleted.", "Code fiscale was NOT found.");
+            ExecuteAction(Action.Delete, Resources.CodeFiscaleWasDeletedMessage, Resources.CodeFiscaleWasNotDeleted);
         }
 
         private void CopyBtn_Click(object sender, EventArgs e)
@@ -112,7 +113,7 @@ namespace CodeFiscaleGenerator
         {
             if (string.IsNullOrWhiteSpace(_viewState.CodeFiscale))
             {
-                MessageBox.Show("Please enter code fiscale.", Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Resources.PleaseEnterCodeFiscaleMessage, Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return;
             }
@@ -149,13 +150,13 @@ namespace CodeFiscaleGenerator
 
             string codeFiscale;
 
-            var codeFiscaleList = GetCodeFiscaleList();
+            var response = GetCodeFiscaleList();
 
             do
             {
                 codeFiscale = _calculator.GenerateFiscaleCode(_viewState.SelectedLabelId, _viewState.SelectedRegistrationId, _viewState.SelectedSubregistrationId);
 
-                if (codeFiscaleList.HasCode(codeFiscale))
+                if (response != null && response.HasCode(codeFiscale))
                 {
                     _stubService.RegisterNewCodeFiscale(codeFiscale, _viewState.SelectedRegistrationId, _viewState.SelectedSubregistrationId, _viewState.SelectedLabelId);
 

@@ -1,4 +1,4 @@
-﻿namespace CodeFiscaleGenerator
+﻿namespace CodeFiscaleGenerator.Infrastucture
 {
     public class ComboBoxItem
     {
@@ -9,7 +9,7 @@
         }
 
         public int Id { get; private set; }
-        public string Text { get; private set; }
+        private string Text { get; set; }
 
         public override string ToString()
         {

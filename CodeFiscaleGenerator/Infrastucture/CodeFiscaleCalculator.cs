@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
-using CodeFiscaleGenerator.Entities.Stub;
 
 namespace CodeFiscaleGenerator.Infrastucture
 {
-    internal class CodeFiscaleCalculator
+    internal sealed class CodeFiscaleCalculator
     {
         public string GenerateFiscaleCode(int labelId, int registrationId, int subRegistrationId)
         {

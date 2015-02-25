@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CodeFiscaleGenerator.Infrastucture
 {
-    internal class HttpRequestHandler
+    internal sealed class HttpRequestHandler
     {
         private const int RequestTimeoutMs = 5000;
         private const string ContentType = "application/xml";
