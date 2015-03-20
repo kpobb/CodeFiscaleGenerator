@@ -61,70 +61,52 @@ namespace CodeFiscaleGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Code fiscale was successfully created!.
+        ///   Looks up a localized string similar to Code already registered..
         /// </summary>
-        internal static string CodeFiscaleSuccessMessage {
+        internal static string CodeFiscaleAlreadyRegistered {
             get {
-                return ResourceManager.GetString("CodeFiscaleSuccessMessage", resourceCulture);
+                return ResourceManager.GetString("CodeFiscaleAlreadyRegistered", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Code fiscale was succesfully deleted..
+        ///   Looks up a localized string similar to Successfully registered!.
         /// </summary>
-        internal static string CodeFiscaleWasDeletedMessage {
+        internal static string CodeFiscaleSuccesfullyCreated {
             get {
-                return ResourceManager.GetString("CodeFiscaleWasDeletedMessage", resourceCulture);
+                return ResourceManager.GetString("CodeFiscaleSuccesfullyCreated", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Code fiscale was FOUND on remote server!.
+        ///   Looks up a localized string similar to Code was FOUND!.
         /// </summary>
-        internal static string CodeFiscaleWasFoundMessage {
+        internal static string CodeFiscaleWasFound {
             get {
-                return ResourceManager.GetString("CodeFiscaleWasFoundMessage", resourceCulture);
+                return ResourceManager.GetString("CodeFiscaleWasFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Code fiscale was NOT found..
+        ///   Looks up a localized string similar to Code was NOT found!.
         /// </summary>
-        internal static string CodeFiscaleWasNotDeleted {
+        internal static string CodeFiscaleWasNotFound {
             get {
-                return ResourceManager.GetString("CodeFiscaleWasNotDeleted", resourceCulture);
+                return ResourceManager.GetString("CodeFiscaleWasNotFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Code fiscale was NOT found..
+        ///   Looks up a localized string similar to Code deleted..
         /// </summary>
-        internal static string CodeFiscaleWasNotFoundMessage {
+        internal static string CodeFiscaleWasSuccesfullyDeleted {
             get {
-                return ResourceManager.GetString("CodeFiscaleWasNotFoundMessage", resourceCulture);
+                return ResourceManager.GetString("CodeFiscaleWasSuccesfullyDeleted", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error.
-        /// </summary>
-        internal static string ErrorTitle {
-            get {
-                return ResourceManager.GetString("ErrorTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Information.
-        /// </summary>
-        internal static string InformationTitle {
-            get {
-                return ResourceManager.GetString("InformationTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Internal error. Probably Platform issue. Please try again later..
+        ///   Looks up a localized string similar to Internal error. .
         /// </summary>
         internal static string InternalErrorMessage {
             get {
@@ -135,9 +117,9 @@ namespace CodeFiscaleGenerator.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Please enter code fiscale..
         /// </summary>
-        internal static string PleaseEnterCodeFiscaleMessage {
+        internal static string PleaseEnterCodeFiscale {
             get {
-                return ResourceManager.GetString("PleaseEnterCodeFiscaleMessage", resourceCulture);
+                return ResourceManager.GetString("PleaseEnterCodeFiscale", resourceCulture);
             }
         }
     }

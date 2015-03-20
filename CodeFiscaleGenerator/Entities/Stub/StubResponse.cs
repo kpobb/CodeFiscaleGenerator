@@ -10,9 +10,14 @@ namespace CodeFiscaleGenerator.Entities.Stub
         [XmlElement(ElementName = "ConfigurableResponse")]
         public CodeFiscaleData[] Items { get; set; }
 
-        public bool HasCode(string codeFiscale)
+        public bool HasCodeFiscale(string codeFiscale)
         {
-            return !(Items != null && Items.Any(s => s.FiscalCode.Equals(codeFiscale, StringComparison.InvariantCultureIgnoreCase)));
+            return Items != null && Items.Any(s => s.FiscalCode.Equals(codeFiscale, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        public CodeFiscaleData FindCodeFiscaleData(string codeFiscale)
+        {
+            return Items.FirstOrDefault(s => s.FiscalCode.Equals(codeFiscale, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

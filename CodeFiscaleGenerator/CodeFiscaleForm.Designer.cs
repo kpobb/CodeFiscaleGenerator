@@ -43,6 +43,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.copyBtn = new System.Windows.Forms.Button();
+            this.registerBtn = new System.Windows.Forms.Button();
+            this.message = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelCbox
@@ -104,28 +106,28 @@
             // 
             this.fiscaleCodeTbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.fiscaleCodeTbox.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.fiscaleCodeTbox.Location = new System.Drawing.Point(22, 169);
+            this.fiscaleCodeTbox.Location = new System.Drawing.Point(23, 195);
             this.fiscaleCodeTbox.Name = "fiscaleCodeTbox";
             this.fiscaleCodeTbox.Size = new System.Drawing.Size(186, 26);
             this.fiscaleCodeTbox.TabIndex = 6;
             // 
             // createBtn
             // 
-            this.createBtn.Location = new System.Drawing.Point(22, 202);
+            this.createBtn.Location = new System.Drawing.Point(23, 227);
             this.createBtn.Name = "createBtn";
             this.createBtn.Size = new System.Drawing.Size(90, 25);
             this.createBtn.TabIndex = 7;
-            this.createBtn.Text = "Generate code";
+            this.createBtn.Text = "Generate";
             this.createBtn.UseVisualStyleBackColor = true;
-            this.createBtn.Click += new System.EventHandler(this.Create_Click);
+            this.createBtn.Click += new System.EventHandler(this.GenerateCodeFiscale_Click);
             // 
             // checkBtn
             // 
-            this.checkBtn.Location = new System.Drawing.Point(22, 233);
+            this.checkBtn.Location = new System.Drawing.Point(23, 258);
             this.checkBtn.Name = "checkBtn";
             this.checkBtn.Size = new System.Drawing.Size(90, 25);
             this.checkBtn.TabIndex = 8;
-            this.checkBtn.Text = "Verify code";
+            this.checkBtn.Text = "Verify";
             this.checkBtn.UseVisualStyleBackColor = true;
             this.checkBtn.Click += new System.EventHandler(this.Check_Click);
             // 
@@ -155,7 +157,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 153);
+            this.label6.Location = new System.Drawing.Point(20, 179);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 13);
             this.label6.TabIndex = 13;
@@ -163,17 +165,17 @@
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(117, 233);
+            this.deleteBtn.Location = new System.Drawing.Point(119, 258);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(90, 25);
             this.deleteBtn.TabIndex = 15;
-            this.deleteBtn.Text = "Delete code";
+            this.deleteBtn.Text = "Delete";
             this.deleteBtn.UseVisualStyleBackColor = true;
-            this.deleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
+            this.deleteBtn.Click += new System.EventHandler(this.DeleteCodeFiscale_Click);
             // 
             // copyBtn
             // 
-            this.copyBtn.Location = new System.Drawing.Point(214, 169);
+            this.copyBtn.Location = new System.Drawing.Point(217, 195);
             this.copyBtn.Name = "copyBtn";
             this.copyBtn.Size = new System.Drawing.Size(49, 26);
             this.copyBtn.TabIndex = 16;
@@ -181,12 +183,34 @@
             this.copyBtn.UseVisualStyleBackColor = true;
             this.copyBtn.Click += new System.EventHandler(this.CopyBtn_Click);
             // 
+            // registerBtn
+            // 
+            this.registerBtn.Location = new System.Drawing.Point(118, 227);
+            this.registerBtn.Name = "registerBtn";
+            this.registerBtn.Size = new System.Drawing.Size(90, 25);
+            this.registerBtn.TabIndex = 17;
+            this.registerBtn.Text = "Register";
+            this.registerBtn.UseVisualStyleBackColor = true;
+            this.registerBtn.Click += new System.EventHandler(this.RegisterNewCodeFiscale_Click);
+            // 
+            // message
+            // 
+            this.message.AutoSize = true;
+            this.message.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.message.ForeColor = System.Drawing.Color.Black;
+            this.message.Location = new System.Drawing.Point(20, 153);
+            this.message.Name = "message";
+            this.message.Size = new System.Drawing.Size(0, 16);
+            this.message.TabIndex = 18;
+            // 
             // CodeFiscaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
-            this.ClientSize = new System.Drawing.Size(282, 272);
+            this.ClientSize = new System.Drawing.Size(282, 302);
+            this.Controls.Add(this.message);
+            this.Controls.Add(this.registerBtn);
             this.Controls.Add(this.copyBtn);
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.label6);
@@ -206,7 +230,7 @@
             this.MaximizeBox = false;
             this.Name = "CodeFiscaleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CodeFiscaleGenerator vX.X";
+            this.Text = "CodeFiscaleGenerator vX.X.X";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,6 +252,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button deleteBtn;
         private System.Windows.Forms.Button copyBtn;
+        private System.Windows.Forms.Button registerBtn;
+        private System.Windows.Forms.Label message;
     }
 }
 

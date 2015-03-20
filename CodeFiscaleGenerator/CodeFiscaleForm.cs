@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using CodeFiscaleGenerator.Configurations;
-using CodeFiscaleGenerator.Entities.Stub;
 using CodeFiscaleGenerator.Infrastucture;
 using CodeFiscaleGenerator.Properties;
 using CodeFiscaleGenerator.Services;
@@ -10,7 +9,6 @@ namespace CodeFiscaleGenerator
 {
     public partial class CodeFiscaleForm : Form
     {
-        private const int MaxRequestAttempts = 20;
         private readonly ViewState _viewState;
         private readonly CodeFiscaleCalculator _calculator;
         private readonly PlatformStubService _stubService;
@@ -19,7 +17,7 @@ namespace CodeFiscaleGenerator
         {
             InitializeComponent();
 
-            _viewState = new ViewState(labelCbox, registrationCbox, subregistrationCbox, fiscaleCodeTbox);
+            _viewState = new ViewState(labelCbox, registrationCbox, subregistrationCbox, fiscaleCodeTbox, cloneCBox, message);
             _viewState.SetupTrustRelationshipForSSL();
             Text = string.Format("CodeFiscaleGenerator v{0}.{1}.{2}", _viewState.AssemblyVersion.Major, _viewState.AssemblyVersion.Minor, _viewState.AssemblyVersion.Build);
 
@@ -28,52 +26,90 @@ namespace CodeFiscaleGenerator
             _stubService = new PlatformStubService(new HttpRequestHandler(), new StubConfiguration());
         }
 
-        private enum Action
-        {
-            Check,
-            Delete
-        }
-
         public override sealed string Text
         {
             get { return base.Text; }
             set { base.Text = value; }
         }
 
-        private void Create_Click(object sender, EventArgs e)
+        private void RegisterNewCodeFiscale_Click(object sender, EventArgs e)
         {
-            string codeFiscale;
-
-            StubResponse response;
-
-            try
+            if (string.IsNullOrWhiteSpace(_viewState.CodeFiscale))
             {
-                codeFiscale = RegisterNewCodeFiscale();
-
-                response = GetCodeFiscaleList();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _viewState.AddMessage(Resources.PleaseEnterCodeFiscale);
 
                 return;
             }
 
-            if (response != null && !response.HasCode(codeFiscale))
+            try
             {
-                fiscaleCodeTbox.Text = codeFiscale;
+                var response = _stubService.GetCodeFiscaleList(_viewState.SelectedLabelId);
 
-                MessageBox.Show(Resources.CodeFiscaleSuccessMessage, Resources.InformationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (response.HasCodeFiscale(_viewState.CodeFiscale))
+                {
+                    _viewState.AddMessage(Resources.CodeFiscaleAlreadyRegistered);
+                }
+                else
+                {
+                    RegisterCodeFiscale(_viewState.CodeFiscale);
+
+                    response = _stubService.GetCodeFiscaleList(_viewState.SelectedLabelId);
+
+                    if (response.HasCodeFiscale(_viewState.CodeFiscale))
+                    {
+                        _viewState.AddMessage(Resources.CodeFiscaleSuccesfullyCreated);
+                    }
+                    else
+                    {
+                        _viewState.AddMessage(Resources.InternalErrorMessage);
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(Resources.InternalErrorMessage, Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _viewState.AddMessage(ex.Message);
             }
+        }
+
+        private void GenerateCodeFiscale_Click(object sender, EventArgs e)
+        {
+            var codeFiscale = GenerateNewCodeFiscale();
+
+            _viewState.SetCodeFiscale(codeFiscale);
         }
 
         private void Check_Click(object sender, EventArgs e)
         {
-            ExecuteAction(Action.Check, Resources.CodeFiscaleWasFoundMessage, Resources.CodeFiscaleWasNotFoundMessage);
+            if (string.IsNullOrWhiteSpace(_viewState.CodeFiscale))
+            {
+                _viewState.AddMessage(Resources.PleaseEnterCodeFiscale);
+
+                return;
+            }
+
+            try
+            {
+                var response = _stubService.GetCodeFiscaleList(_viewState.SelectedLabelId);
+
+                if (response.HasCodeFiscale(_viewState.CodeFiscale))
+                {
+                    var data = response.FindCodeFiscaleData(_viewState.CodeFiscale);
+
+                    _viewState.SetRegistrationId(data.IndividualAccountOpeningResponseCode);
+                    _viewState.SetSubRegistrationId(data.SubregistrationResponseCode);
+                    _viewState.SetCloneState(false);
+
+                    _viewState.AddMessage(Resources.CodeFiscaleWasFound);
+                }
+                else
+                {
+                    _viewState.AddMessage(Resources.CodeFiscaleWasNotFound);
+                }
+            }
+            catch (Exception ex)
+            {
+                _viewState.AddMessage(ex.Message);
+            }
         }
 
         private void CloneCbox_CheckedChanged(object sender, EventArgs e)
@@ -99,9 +135,25 @@ namespace CodeFiscaleGenerator
             }
         }
 
-        private void DeleteBtn_Click(object sender, EventArgs e)
+        private void DeleteCodeFiscale_Click(object sender, EventArgs e)      
         {
-            ExecuteAction(Action.Delete, Resources.CodeFiscaleWasDeletedMessage, Resources.CodeFiscaleWasNotDeleted);
+            if (string.IsNullOrWhiteSpace(_viewState.CodeFiscale))
+            {
+                _viewState.AddMessage(Resources.PleaseEnterCodeFiscale);
+
+                return;
+            }
+
+            try
+            {
+                _stubService.DeleteCodeFiscale(_viewState.SelectedLabelId, _viewState.CodeFiscale);
+
+                _viewState.AddMessage(Resources.CodeFiscaleWasSuccesfullyDeleted);
+            }
+            catch
+            {
+                _viewState.AddMessage(Resources.CodeFiscaleWasNotFound);
+            }
         }
 
         private void CopyBtn_Click(object sender, EventArgs e)
@@ -112,75 +164,14 @@ namespace CodeFiscaleGenerator
             }
         }
 
-        private void ExecuteAction(Action action, string successMessage, string failedMessage)
+        private string GenerateNewCodeFiscale()
         {
-            if (string.IsNullOrWhiteSpace(_viewState.CodeFiscale))
-            {
-                MessageBox.Show(Resources.PleaseEnterCodeFiscaleMessage, Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return;
-            }
-
-            try
-            {
-                var codeFiscaleList = GetCodeFiscaleList();
-
-                if (!codeFiscaleList.HasCode(_viewState.CodeFiscale))
-                {
-                    switch (action)
-                    {
-                        case Action.Delete:
-                            _stubService.DeleteCodeFiscale(_viewState.SelectedLabelId, _viewState.CodeFiscale);
-                            break;
-                    }
-
-                    MessageBox.Show(successMessage, Resources.InformationTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show(failedMessage, Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, Resources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            return _calculator.GenerateFiscaleCode(_viewState.SelectedLabelId, _viewState.SelectedRegistrationId, _viewState.SelectedSubregistrationId);
         }
 
-        private string RegisterNewCodeFiscale()
+        private void RegisterCodeFiscale(string codeFiscale)
         {
-            var requestAttempts = MaxRequestAttempts;
-
-            string codeFiscale;
-
-            var response = GetCodeFiscaleList();
-
-            do
-            {
-                codeFiscale = _calculator.GenerateFiscaleCode(_viewState.SelectedLabelId, _viewState.SelectedRegistrationId, _viewState.SelectedSubregistrationId);
-
-                if (response != null && response.HasCode(codeFiscale))
-                {
-                    _stubService.RegisterNewCodeFiscale(codeFiscale, _viewState.SelectedRegistrationId, _viewState.SelectedSubregistrationId, _viewState.SelectedLabelId);
-
-                    break;
-                }
-
-                requestAttempts--;
-            }
-            while (requestAttempts != 0);
-
-            if (requestAttempts == 0 && string.IsNullOrWhiteSpace(codeFiscale))
-            {
-                throw new Exception(string.Format("Can't generate a unique code fiscale after {0} attempts.", MaxRequestAttempts));
-            }
-
-            return codeFiscale;
-        }
-
-        private StubResponse GetCodeFiscaleList()
-        {
-            return _stubService.GetCodeFiscaleList(_viewState.SelectedLabelId);
+            _stubService.RegisterNewCodeFiscale(codeFiscale, _viewState.SelectedRegistrationId, _viewState.SelectedSubregistrationId, _viewState.SelectedLabelId);
         }
     }
 }

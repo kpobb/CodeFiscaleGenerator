@@ -117,31 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ErrorTitle" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="InformationTitle" xml:space="preserve">
-    <value>Information</value>
-  </data>
   <data name="InternalErrorMessage" xml:space="preserve">
-    <value>Internal error. Probably Platform issue. Please try again later.</value>
+    <value>Internal error. </value>
   </data>
-  <data name="CodeFiscaleSuccessMessage" xml:space="preserve">
-    <value>Code fiscale was successfully created!</value>
+  <data name="CodeFiscaleSuccesfullyCreated" xml:space="preserve">
+    <value>Successfully registered!</value>
   </data>
-  <data name="PleaseEnterCodeFiscaleMessage" xml:space="preserve">
+  <data name="PleaseEnterCodeFiscale" xml:space="preserve">
     <value>Please enter code fiscale.</value>
   </data>
-  <data name="CodeFiscaleWasDeletedMessage" xml:space="preserve">
-    <value>Code fiscale was succesfully deleted.</value>
+  <data name="CodeFiscaleWasSuccesfullyDeleted" xml:space="preserve">
+    <value>Code deleted.</value>
   </data>
-  <data name="CodeFiscaleWasFoundMessage" xml:space="preserve">
-    <value>Code fiscale was FOUND on remote server!</value>
+  <data name="CodeFiscaleWasFound" xml:space="preserve">
+    <value>Code was FOUND!</value>
   </data>
-  <data name="CodeFiscaleWasNotDeleted" xml:space="preserve">
-    <value>Code fiscale was NOT found.</value>
+  <data name="CodeFiscaleWasNotFound" xml:space="preserve">
+    <value>Code was NOT found!</value>
   </data>
-  <data name="CodeFiscaleWasNotFoundMessage" xml:space="preserve">
-    <value>Code fiscale was NOT found.</value>
+  <data name="CodeFiscaleAlreadyRegistered" xml:space="preserve">
+    <value>Code already registered.</value>
   </data>
 </root>
