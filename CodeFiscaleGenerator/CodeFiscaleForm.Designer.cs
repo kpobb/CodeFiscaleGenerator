@@ -197,7 +197,7 @@
             // 
             this.message.AutoSize = true;
             this.message.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.message.ForeColor = System.Drawing.Color.Black;
+            this.message.ForeColor = System.Drawing.Color.RoyalBlue;
             this.message.Location = new System.Drawing.Point(20, 153);
             this.message.Name = "message";
             this.message.Size = new System.Drawing.Size(0, 16);
