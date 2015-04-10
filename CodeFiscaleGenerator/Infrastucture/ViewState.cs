@@ -100,6 +100,11 @@ namespace CodeFiscaleGenerator.Infrastucture
             _message.Text = message;
         }
 
+        public void ClearMessage()
+        {
+            _message.Text = string.Empty;
+        }
+
         private void FillComboBox(ComboBox cbox, object[] values)
         {
             cbox.Items.AddRange(values);

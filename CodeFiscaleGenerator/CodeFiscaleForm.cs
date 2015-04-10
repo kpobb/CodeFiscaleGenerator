@@ -76,6 +76,8 @@ namespace CodeFiscaleGenerator
             var codeFiscale = GenerateNewCodeFiscale();
 
             _viewState.SetCodeFiscale(codeFiscale);
+
+            _viewState.ClearMessage();
         }
 
         private void Check_Click(object sender, EventArgs e)
